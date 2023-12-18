@@ -1,0 +1,84 @@
+﻿@model AppUILayer.Model.AdminInfoModel
+@{
+    Layout = null; // Assuming you don't want a layout for this view
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add any additional styles or scripts here -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .login-container h2 {
+                text-align: center;
+                color: #007bff;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                font-weight: bold;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 3px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Admin Login</h2>
+
+        @using (Html.BeginForm("adminLogin", "Login", FormMethod.Post, new { id = "adminLoginForm" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.EmailId, "Email:")
+                @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Enter your email" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, "Password:")
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter your password" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        }
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add any additional scripts or references here -->
+
+</body>
+</html>

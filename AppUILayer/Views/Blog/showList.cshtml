@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AppUILayer.Model.BlogInfoModel>
+
+@{
+    ViewBag.Title = "showList";
+    Layout = "~/Views/Shared/_Logout.cshtml";
+}
+    <p>
+        <h1>Blog List For:@Session["EmailId"].ToString()</h1>
+    </p>
+    <br />
+    <p>
+        @Html.ActionLink("Add New", "Create")
+    </p>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <div>
+            <li>@item.Title</li>
+            <li>Date: @item.DateOfCreation</li>
+            <li>Subject: @item.Subject</li>
+            <li>@item.BlogUrl</li>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BlogId })
+            <br />
+            @Html.ActionLink("Delete", "Delete", new { id = item.BlogId })
+            <hr />
+            </div>
+        }
+
+    </ul>

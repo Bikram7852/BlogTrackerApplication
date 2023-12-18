@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AppUILayer.Model.EmpInfoModel>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LogoutEmp.cshtml";
+}
+
+<h2>Employee List</h2>
+
+<p>
+    @Html.ActionLink("Add New", "Create")
+</p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfJoining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassCode)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfJoining)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassCode)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { Email = item.EmailId.ToString() }) |
+                    
+                    @Html.ActionLink("Delete", "Delete", new { Email = item.EmailId.ToString() })
+                </td>
+            </tr>
+        }
+
+    </table>
+
