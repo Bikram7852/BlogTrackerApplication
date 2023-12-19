@@ -46,9 +46,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AppUILayer">
-      <HintPath>..\AppUILayer\bin\AppUILayer.dll</HintPath>
-    </Reference>
     <Reference Include="BlogDAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AppUILayer\bin\BlogDAL.dll</HintPath>

@@ -26,12 +26,7 @@
                     <li>
                         @Html.DropDownListFor(m=> usertype, availableUserTypes, "Login", new { @class = "form-control", id = "userTypeDropdown" })
                     </li>
-                    @*<li>
-                        @using (Html.BeginForm("UserTypeSelected", "Blog", FormMethod.Post, new { id = "userTypeForm" }))
-                        {
-                            @Html.DropDownList("UserTypes", ViewBag.UserTypes as SelectList, "Login", new { @class = "form-control", id = "userTypeDropdown" })
-                        }
-                    </li>*@
+                    
                 </ul>
                 
 

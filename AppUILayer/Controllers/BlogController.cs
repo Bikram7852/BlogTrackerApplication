@@ -17,27 +17,30 @@ namespace AppUILayer.Controllers
         // GET: Blog
         public ActionResult Index()
         {
-            
-            List<BlogInfo> blogs = db.BlogInfos.ToList();
-            List<BlogInfoModel> list = new List<BlogInfoModel>();
-
-            foreach (var item in blogs)
+            if (Session["EmailId"] == null)
             {
-                SelectList availableUserTypes = new SelectList(Enum.GetValues(typeof(UserType)));
-                BlogInfoModel bim = new BlogInfoModel
-                {
-                    BlogId = item.BlogId,
-                    Title = item.Title,
-                    Subject = item.Subject,
-                    DateOfCreation = item.DateOfCreation,
-                    EmpEmailId = item.EmpEmailId,
-                    BlogUrl = item.BlogUrl,
-                    AvailableUserTypes = availableUserTypes
-                };
+                List<BlogInfo> blogs = db.BlogInfos.ToList();
+                List<BlogInfoModel> list = new List<BlogInfoModel>();
 
-                list.Add(bim);
+                foreach (var item in blogs)
+                {
+                    SelectList availableUserTypes = new SelectList(Enum.GetValues(typeof(UserType)));
+                    BlogInfoModel bim = new BlogInfoModel
+                    {
+                        BlogId = item.BlogId,
+                        Title = item.Title,
+                        Subject = item.Subject,
+                        DateOfCreation = item.DateOfCreation,
+                        EmpEmailId = item.EmpEmailId,
+                        BlogUrl = item.BlogUrl,
+                        AvailableUserTypes = availableUserTypes
+                    };
+
+                    list.Add(bim);
+                }
+                return View(list); 
             }
-            return View(list);
+            return HttpNotFound();
         }
         
         public ActionResult showList()
@@ -87,7 +90,7 @@ namespace AppUILayer.Controllers
             }
             return HttpNotFound();
         }
-
+        
         // GET: Blog/Create
         public ActionResult Create()
         {

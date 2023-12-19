@@ -1,4 +1,4 @@
-﻿@model AppUILayer.Model.EmpInfoModel
+﻿@model AppUILayer.Model.EmpLoginModel
 @{
     Layout = null; // Assuming you don't want a layout for this view
 }
@@ -61,14 +61,18 @@
 
         @using (Html.BeginForm("empLogin", "Login", FormMethod.Post, new { id = "empLoginForm" }))
         {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             <div class="form-group">
                 @Html.LabelFor(m => m.EmailId, "Email:")
                 @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Enter your email" })
+                @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(m => m.PassCode, "PassCode:")
                 @Html.PasswordFor(m => m.PassCode, new { @class = "form-control", placeholder = "Enter your PassCode" })
+                @Html.ValidationMessageFor(model => model.PassCode, "", new { @class = "text-danger" })
             </div>
 
             <button type="submit" class="btn btn-primary">Login</button>

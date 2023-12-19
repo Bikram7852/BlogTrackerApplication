@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Services.Description;
 
 namespace AppUILayer.Controllers
 {
@@ -20,21 +21,35 @@ namespace AppUILayer.Controllers
         [HttpPost]
         public ActionResult adminLogin(AdminLoginModel admin)
         {
-           
-            if (ModelState.IsValid)
-            {
-                var obj = db.AdminInfos.Where(a=>a.EmailId.Equals(admin.EmailId) && a.Password.Equals(admin.Password)).FirstOrDefault();
-                if (obj != null)
-                {
-                    FormsAuthentication.SetAuthCookie(obj.EmailId, false);
-                    Session["EmailId"] = obj.EmailId.ToString();
-                    return RedirectToAction("Index", "Emp");
-                }
-                
-            }
 
-            ModelState.AddModelError("", "Invalid email or password");
-            return View(admin);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var obj = db.AdminInfos.Where(a => a.EmailId.Equals(admin.EmailId) && a.Password.Equals(admin.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        FormsAuthentication.SetAuthCookie(obj.EmailId, false);
+                        Session["EmailId"] = obj.EmailId.ToString();
+                        return RedirectToAction("Index", "Emp");
+                    }
+
+                }
+
+                ModelState.AddModelError("", "Invalid email or password!");
+                return View(admin);
+            }
+            catch (InvalidEmailOrPasswordException ex)
+            {
+
+                ViewBag.ErrorMessage = "Invalid email or password!";
+                return View("Error");
+            }
+            catch (Exception ex) 
+            {
+                ViewBag.ErrorMessage = "An error occurred: "+ex.Message;
+                return View("Error");
+            }
         }
         public ActionResult empLogin()
         {
@@ -44,20 +59,34 @@ namespace AppUILayer.Controllers
         public ActionResult empLogin(EmpLoginModel emp)
         {
 
-            if (ModelState.IsValid)
+            try
             {
-                var obj = db.EmpInfos.Where(e => e.EmailId.Equals(emp.EmailId) && e.PassCode.Equals(emp.PassCode)).FirstOrDefault();
-                if (obj != null)
+                if (ModelState.IsValid)
                 {
-                    FormsAuthentication.SetAuthCookie(obj.EmailId, false);
-                    Session["EmailId"] = obj.EmailId.ToString();
-                    Session["Name"] = obj.Name.ToString();
-                    return RedirectToAction("showList", "Blog");
+                    var obj = db.EmpInfos.Where(e => e.EmailId.Equals(emp.EmailId) && e.PassCode.Equals(emp.PassCode)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        FormsAuthentication.SetAuthCookie(obj.EmailId, false);
+                        Session["EmailId"] = obj.EmailId.ToString();
+                        Session["Name"] = obj.Name.ToString();
+                        return RedirectToAction("showList", "Blog");
+                    }
                 }
-            }
 
-            ModelState.AddModelError("", "Invalid email or password");
-            return View(emp);
+                ModelState.AddModelError("", "Invalid email or password");
+                return View(emp);
+            }
+            catch (InvalidEmailOrPasswordException ex)
+            {
+
+                ViewBag.ErrorMessage = "Invalid email or password!";
+                return View("Error");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "An error occurred: " + ex.Message;
+                return View("Error");
+            }
         }
         public ActionResult Logout()
         {

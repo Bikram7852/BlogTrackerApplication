@@ -47,7 +47,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AppServiceLayer">
+    <Reference Include="AppServiceLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AppServiceLayer\bin\AppServiceLayer.dll</HintPath>
     </Reference>
     <Reference Include="BlogDAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -148,6 +149,7 @@
     <Compile Include="Model\BlogInfoModel.cs" />
     <Compile Include="Model\EmpInfoModel.cs" />
     <Compile Include="Model\EmpLoginModel.cs" />
+    <Compile Include="Model\InvalidEmailOrPasswordException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
