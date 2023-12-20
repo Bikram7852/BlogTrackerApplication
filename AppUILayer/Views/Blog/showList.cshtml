@@ -4,26 +4,58 @@
     ViewBag.Title = "showList";
     Layout = "~/Views/Shared/_Logout.cshtml";
 }
-    <p>
-        <h1>Blog List For:@Session["EmailId"].ToString()</h1>
-    </p>
-    <br />
-    <p>
-        @Html.ActionLink("Add New", "Create")
-    </p>
-    <ul>
-        @foreach (var item in Model)
-        {
-            <div>
-            <li>@item.Title</li>
-            <li>Date: @item.DateOfCreation</li>
-            <li>Subject: @item.Subject</li>
-            <li>@item.BlogUrl</li>
-            @Html.ActionLink("Edit", "Edit", new { id = item.BlogId })
-            <br />
-            @Html.ActionLink("Delete", "Delete", new { id = item.BlogId })
-            <hr />
-            </div>
-        }
 
-    </ul>
+<style>
+    /* Add your custom styles here */
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    #listContainer {
+        background-color: #00ffe0;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+
+    hr {
+        border-top: 1px solid #ccc;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .action-links {
+        color: #007bff;
+        margin-right: 10px;
+    }
+</style>
+
+<p>
+    <h1>Blog List For: @Session["EmailId"].ToString()</h1>
+</p>
+<br />
+<p>
+    @Html.ActionLink("Add New", "Create")
+</p>
+<ul>
+    @foreach (var item in Model)
+    {
+        <div id="listContainer">
+        <li style="color: #333; font-weight: bold;">
+            @Html.DisplayFor(modelItem => item.Title)
+        </li>
+        <li>Date: @Html.DisplayFor(modelItem => item.DateOfCreation)</li>
+        <li>Subject: @Html.DisplayFor(modelItem => item.Subject)</li>
+        <li>@Html.DisplayFor(modelItem => item.BlogUrl)</li>
+        @Html.ActionLink("Edit", "Edit", new { id = item.BlogId }, new { @class = "action-links" })
+        @Html.ActionLink("Delete", "Delete", new { id = item.BlogId }, new { @class = "action-links" })
+        <hr />
+        </div>
+    }
+</ul>

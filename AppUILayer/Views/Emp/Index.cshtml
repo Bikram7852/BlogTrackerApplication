@@ -1,18 +1,44 @@
 ﻿@model IEnumerable<AppUILayer.Model.EmpInfoModel>
 
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LogoutEmp.cshtml";
 }
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<style>
+    h2 {
+        color: #007bff;
+    }
+
+    .table th, .table td {
+        text-align: center;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+    }
+
+    .btn-default {
+        background-color: #28a745;
+        color: #fff;
+        margin-right: 5px;
+    }
+
+        .btn-default:hover {
+            background-color: #218838;
+        }
+</style>
+
 <h2>Employee List</h2>
 
 <p>
-    @Html.ActionLink("Add New", "Create")
+    @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-default" })
 </p>
 
-    <table class="table">
+<table class="table table-bordered">
+    <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.EmailId)
@@ -28,7 +54,8 @@
             </th>
             <th></th>
         </tr>
-
+    </thead>
+    <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -45,12 +72,14 @@
                     @Html.DisplayFor(modelItem => item.PassCode)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { Email = item.EmailId.ToString() }) |
-                    
-                    @Html.ActionLink("Delete", "Delete", new { Email = item.EmailId.ToString() })
+                    @Html.ActionLink("Edit", "Edit", new { Email = item.EmailId.ToString() }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Delete", "Delete", new { Email = item.EmailId.ToString() }, new { @class = "btn btn-default" })
                 </td>
             </tr>
         }
+    </tbody>
+</table>
 
-    </table>
-
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

@@ -5,18 +5,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+  
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+
+    #listContainer {
+        background-color: #00ffe0;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+
+    hr {
+        border-top: 1px solid #ccc;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+
 <div id="userTypeDetailsContainer">
     @*PartialView content will be loaded here*@
 </div>
-<br/>
+<br />
+
 <ul>
     @foreach (var item in Model)
     {
-        <div>
-        <li>@item.Title - By @item.EmpEmailId</li>
-        <li>Date: @item.DateOfCreation</li>
-        <li>Subject: @item.Subject</li>
-        <li>@item.BlogUrl</li>
+        <div id="listContainer">
+        <li style="color: #333; font-weight: bold;">
+            @Html.DisplayFor(modelItem => item.Title) - By @Html.DisplayFor(modelItem => item.EmpEmailId)
+        </li>
+        <li>Date: @Html.DisplayFor(modelItem => item.DateOfCreation)</li>
+        <li>Subject: @Html.DisplayFor(modelItem => item.Subject)</li>
+        <li>@Html.DisplayFor(modelItem => item.BlogUrl)</li>
         <hr />
         </div>
     }
